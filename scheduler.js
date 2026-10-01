@@ -1,6 +1,6 @@
 'use strict';
 
-const SpotPrices = require('./Spotprices');
+const SpotPrices = require('./SpotPrices');
 
 const spot = new SpotPrices();
 

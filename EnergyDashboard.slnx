@@ -1,0 +1,6 @@
+<Solution>
+  <Project Path="EnergyDashboard.esproj">
+    <Build />
+    <Deploy />
+  </Project>
+</Solution>

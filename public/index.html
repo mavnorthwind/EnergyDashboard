@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=800, height=480, initial-scale=1">
+  <title>Energy Spot Price Dashboard</title>
+  <link rel="stylesheet" href="/stylesheets/dashboard.css">
+</head>
+<body>
+  <div id="screen">
+
+    <section id="left">
+      <div class="card" id="currentCard">
+        <div class="label">CURRENT SPOT PRICE</div>
+        <div class="big" id="curPrice">--</div>
+        <div class="unit">ct/kWh</div>
+        <div class="badge" id="curBadge">--</div>
+        <div class="hint" id="curHint">&nbsp;</div>
+      </div>
+      <div class="card side low" id="minCard">
+        <div class="label">MIN PRICE</div>
+        <div class="val"><span id="minPrice">--</span> <small>ct/kWh</small></div>
+        <div class="time"><svg class="ic" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg><span id="minTime">--</span></div>
+      </div>
+      <div class="card side high" id="maxCard">
+        <div class="label">MAX PRICE</div>
+        <div class="val"><span id="maxPrice">--</span> <small>ct/kWh</small></div>
+        <div class="time"><svg class="ic" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg><span id="maxTime">--</span></div>
+      </div>
+    </section>
+
+    <section id="chartPanel" class="card">
+      <div id="head">
+        <svg class="ic" viewBox="0 0 24 24"><rect x="4" y="5" width="16" height="15" rx="2"/><path d="M4 10h16M9 3v4M15 3v4"/></svg>
+        <span id="date">--</span>
+        <span class="sep"></span>
+        <svg class="ic" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>
+        <span id="clock">--:--</span>
+      </div>
+      <div id="chart"></div>
+    </section>
+
+    <section id="bottom">
+      <div class="card info low" id="lowCard">
+        <div class="iconWrap low"><svg class="ic" viewBox="0 0 24 24"><rect x="7" y="6" width="10" height="15" rx="2"/><path d="M10 3h4M12 10l-2 4h4l-2 4"/></svg></div>
+        <div>
+          <div class="label" id="lowTitle">BEST TIME TO CHARGE</div>
+          <div class="win" id="lowWin">--</div>
+          <div class="sub" id="lowSub">Ideal for charging your EV</div>
+        </div>
+      </div>
+      <div class="card info high" id="highCard">
+        <div class="iconWrap high"><svg class="ic" viewBox="0 0 24 24"><path d="M3 18l6-6 4 4 8-9M15 7h6v6"/></svg></div>
+        <div>
+          <div class="label" id="highTitle">HIGH PRICES</div>
+          <div class="win" id="highWin">--</div>
+          <div class="sub" id="highSub">Consider delaying charging</div>
+        </div>
+      </div>
+      <div class="card info rec" id="recCard">
+        <div class="iconWrap rec"><svg class="ic" viewBox="0 0 24 24"><path d="M9 18h6M10 21h4M12 3a6 6 0 0 0-4 10c1 1 1 2 1 3h6c0-1 0-2 1-3a6 6 0 0 0-4-10z"/></svg></div>
+        <div>
+          <div class="label rec">OUR RECOMMENDATION</div>
+          <div class="recTitle" id="recTitle">--</div>
+          <div class="sub" id="recText">&nbsp;</div>
+        </div>
+      </div>
+    </section>
+
+  </div>
+  <script src="/config.js"></script>
+  <script src="/app.js"></script>
+</body>
+</html>

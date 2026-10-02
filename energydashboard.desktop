@@ -1,0 +1,6 @@
+[Desktop Entry]
+Type=Application
+Name=EnergyDashboard
+Exec=sh -c "cd ~/Work/energydashboard && npm start& npx wait-on http://localhost:3000 && chromium --kiosk --password-store=basic http://localhost:3000"
+Terminal=false
+

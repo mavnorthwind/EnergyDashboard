@@ -83,13 +83,13 @@
     svg.appendChild(defs);
 
     // Zonen
-    if (data.lowWindow) {
-      const x1 = xOf(data.lowWindow.start, dayStart), x2 = xOf(data.lowWindow.end, dayStart);
+    for (const window of data.lowWindows) {
+      const x1 = xOf(window.start, dayStart), x2 = xOf(window.end, dayStart);
       svg.appendChild(el('rect', { x: x1, y: Y(C.LOW_THRESHOLD), width: x2 - x1, height: M.t + ph - Y(C.LOW_THRESHOLD), fill: COL.low, 'fill-opacity': 0.16 }));
       for (const x of [x1, x2]) svg.appendChild(el('line', { x1: x, x2: x, y1: Y(C.LOW_THRESHOLD), y2: M.t + ph, stroke: COL.low, 'stroke-dasharray': '3 3', 'stroke-width': 1 }));
     }
-    if (data.highWindow) {
-      const x1 = xOf(data.highWindow.start, dayStart), x2 = xOf(data.highWindow.end, dayStart);
+    for (const window of data.highWindows) {
+      const x1 = xOf(window.start, dayStart), x2 = xOf(window.end, dayStart);
       svg.appendChild(el('rect', { x: x1, y: M.t, width: x2 - x1, height: ph, fill: '#b5482a', 'fill-opacity': 0.22 }));
       for (const x of [x1, x2]) svg.appendChild(el('line', { x1: x, x2: x, y1: M.t, y2: M.t + ph, stroke: COL.high, 'stroke-dasharray': '3 3', 'stroke-width': 1 }));
     }
@@ -198,16 +198,17 @@
 
     $('lowTitle').textContent = `BEST TIME TO CHARGE (<= ${C.LOW_THRESHOLD} ct/kWh)`;
     $('highTitle').textContent = `HIGH PRICES (> ${C.HIGH_THRESHOLD} ct/kWh)`;
-    $('lowWin').innerHTML = data.lowWindow ? `${range(data.lowWindow)} <span class="dur">(${duration(data.lowWindow.start, data.lowWindow.end)})</span>` : 'None today';
-    $('highWin').innerHTML = data.highWindow ? `${range(data.highWindow)} <span class="dur">(${duration(data.highWindow.start, data.highWindow.end)})</span>` : 'None today';
-    $('lowSub').textContent = data.lowWindow ? 'Ideal for charging your EV' : 'No negative prices expected';
-    $('highSub').textContent = data.highWindow ? 'Consider delaying charging' : 'No expensive period today';
+    $('lowWin').innerHTML = data.lowWindows.length ? data.lowWindows.map(window => `${range(window)} <span class="dur">(${duration(window.start, window.end)})</span>`).join(' · ') : 'None today';
+    $('highWin').innerHTML = data.highWindows.length ? data.highWindows.map(window => `${range(window)} <span class="dur">(${duration(window.start, window.end)})</span>`).join(' · ') : 'None today';
+    $('lowSub').textContent = data.lowWindows.length ? 'Ideal for charging your EV' : 'No negative prices expected';
+    $('highSub').textContent = data.highWindows.length ? 'Consider delaying charging' : 'No expensive period today';
 
     const lv = cur ? level(cur.price) : 'mid';
     $('recTitle').textContent = lv === 'low' ? 'Great time to charge now!' : lv === 'high' ? 'Prices are high right now' : 'Prices are moderate';
     let text = '';
-    if (data.highWindow && new Date(data.highWindow.end) > new Date()) {
-      text += `Prices above ${C.HIGH_THRESHOLD} ct/kWh from ${time(data.highWindow.start)}. `;
+    const nextHighWindow = data.highWindows.find(window => new Date(window.end) > new Date());
+    if (nextHighWindow) {
+      text += `Prices above ${C.HIGH_THRESHOLD} ct/kWh from ${time(nextHighWindow.start)}. `;
     }
     if (lv !== 'low' && data.nextLowWindow) {
       text += `Next good window <span class="hl">${time(data.nextLowWindow.start)}</span>.`;

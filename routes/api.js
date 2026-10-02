@@ -14,25 +14,25 @@ function toPoints(ranges) {
     return ranges.map(r => ({ start: r.start.toISOString(), end: r.end.toISOString(), price: r.price }));
 }
 
-/** Laengstes zusammenhaengendes Fenster, in dem predicate(price) gilt */
-function longestWindow(ranges, predicate) {
-    let best = null;
+/** Alle zusammenhaengenden Fenster, in denen predicate(price) gilt */
+function windows(ranges, predicate) {
+    const result = [];
     let cur = null;
     for (const r of ranges) {
         if (predicate(r.price)) {
             if (cur && cur.end.getTime() === r.start.getTime()) {
                 cur.end = r.end;
             } else {
+                if (cur) result.push(cur);
                 cur = { start: r.start, end: r.end };
             }
-            if (!best || cur.end - cur.start > best.end - best.start) {
-                best = cur;
-            }
         } else {
+            if (cur) result.push(cur);
             cur = null;
         }
     }
-    return best && { start: best.start.toISOString(), end: best.end.toISOString() };
+    if (cur) result.push(cur);
+    return result.map(window => ({ start: window.start.toISOString(), end: window.end.toISOString() }));
 }
 
 /** Naechstes Fenster (ab jetzt), in dem predicate(price) gilt */
@@ -84,8 +84,8 @@ router.get('/dashboard', (req, res) => {
         current: current ? { price: current.price, start: current.start.toISOString(), end: current.end.toISOString() } : null,
         min: extreme(todayRanges, (a, b) => a < b),
         max: extreme(todayRanges, (a, b) => a > b),
-        lowWindow: longestWindow(todayRanges, isLow),
-        highWindow: longestWindow(todayRanges, isHigh),
+        lowWindows: windows(todayRanges, isLow),
+        highWindows: windows(todayRanges, isHigh),
         nextLowWindow: nextWindow(slice(all, now, tomorrow.end), isLow, now)
     });
 });

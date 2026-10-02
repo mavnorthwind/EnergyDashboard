@@ -72,12 +72,13 @@ html, body {
 .info.low { background: #0a1a17; border-color: #1c3a2a; }
 .info.high { background: #171518; border-color: #3a2a1f; }
 .info.rec { background: #0a1730; border-color: #163060; }
+.info > div:last-child { min-width: 0; }
 .iconWrap { width: 34px; height: 34px; border-radius: 50%; display: flex; align-items: center; justify-content: center; flex: none; border: 1px solid; }
 .iconWrap .ic { width: 18px; height: 18px; }
 .iconWrap.low { color: #5cb85c; border-color: #2a6a3a; background: #0f2a1c; }
 .iconWrap.high { color: #f0883e; border-color: #8a4a1c; background: #2a1a0f; }
 .iconWrap.rec { color: #4a9eff; border-color: #24508a; background: #0f2245; }
-.info .win { font-size: 15px; font-weight: 700; margin: 2px 0; white-space: nowrap; }
+.info .win { font-size: 11px; line-height: 1.25; font-weight: 700; margin: 2px 0; white-space: normal; }
 .info.low .win, .info.low .label { color: #5cb85c; }
 .info.high .win, .info.high .label { color: #f0883e; }
 .info .label.rec { color: #4a9eff; }

@@ -185,12 +185,14 @@
     if (cur) {
       const lv = level(cur.price);
       $('curPrice').textContent = price(cur.price);
+      $('curTime').textContent = range(cur);
       const card = $('currentCard');
       card.className = 'card ' + lv;
       $('curBadge').textContent = lv === 'low' ? '\u2193 LOW' : lv === 'high' ? '\u2191 HIGH' : '\u2192 NORMAL';
       $('curHint').textContent = lv === 'low' ? 'Great time to charge!' : lv === 'high' ? 'Consider delaying!' : 'Average price level';
     } else {
       $('curPrice').textContent = '--';
+      $('curTime').textContent = '--';
     }
 
     if (data.min) { $('minPrice').textContent = price(data.min.price); $('minTime').textContent = range(data.min); }

@@ -35,7 +35,9 @@ html, body {
 
 #currentCard { padding: 10px 10px; text-align: left; overflow: hidden; }
 #currentCard .big { font-size: 54px; line-height: 1.05; font-weight: 700; margin-top: 12px; color: #5cb85c; }
-#currentCard .unit { font-size: 16px; color: #b8c4d4; margin-bottom: 8px; }
+#currentCard .unitRow { display: flex; align-items: center; gap: 4px; margin-bottom: 8px; white-space: nowrap; }
+#currentCard .unit { font-size: 10px; color: #b8c4d4; }
+#currentCard .time { font-size: 9px; color: #b8c4d4; display: flex; align-items: center; gap: 4px; }
 #currentCard .badge {
   display: inline-block; padding: 3px 9px; border-radius: 4px; font-size: 12px; font-weight: 700;
   color: #5cb85c; background: #12301c; border: 1px solid #2a6a3a;

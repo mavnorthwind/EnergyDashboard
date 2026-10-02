@@ -60,6 +60,8 @@ html, body {
 #head { display: flex; align-items: center; gap: 6px; font-size: 14px; font-weight: 600; height: 24px; color: #e6edf5; }
 #head .ic { width: 15px; height: 15px; }
 #head .sep { width: 1px; height: 16px; background: #2a3850; margin: 0 8px; }
+#connectionStatus { margin-left: auto; color: #ff7777; font-size: 11px; font-weight: 600; }
+#connectionStatus[hidden] { display: none; }
 #chart { flex: 1; min-height: 0; }
 #chart svg { display: block; width: 100%; height: 100%; }
 #chart text { font-family: inherit; }

@@ -2,14 +2,14 @@
 
 // Gemeinsame Konfiguration (Browser und Node.js)
 const CONFIG = {
-    LOW_THRESHOLD: 0,     // ct/kWh: Preise <= Wert sind "gruen"
-    HIGH_THRESHOLD: 20,   // ct/kWh: Preise > Wert sind "rot"
-    Y_MIN: -10,           // Standard-Achsengrenzen (werden bei Bedarf erweitert)
+    LOW_THRESHOLD: 10,     // ct/kWh: Preise <= Wert sind "gruen"
+    HIGH_THRESHOLD: 25,   // ct/kWh: Preise > Wert sind "rot"
+    Y_MIN: 0,           // Standard-Achsengrenzen (werden bei Bedarf erweitert)
     Y_MAX: 30,
     Y_STEP: 10,
     TIMEZONE: 'Europe/Berlin',
-    LOCALE: 'en-GB',
-    RELOAD_MS: 5 * 60 * 1000,
+    LOCALE: 'de-DE',
+    RELOAD_MS: 1 * 60 * 1000,
     TICK_MS: 30 * 1000,
     COLORS: {
         line: '#4a9eff',

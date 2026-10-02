@@ -7,8 +7,8 @@
 
   let data = null;
 
-  const fmtTime = new Intl.DateTimeFormat('en-GB', { hour: '2-digit', minute: '2-digit', hour12: false, timeZone: C.TIMEZONE });
-  const fmtDate = new Intl.DateTimeFormat('en-US', { month: 'long', day: 'numeric', year: 'numeric', timeZone: C.TIMEZONE });
+  const fmtTime = new Intl.DateTimeFormat(C.LOCALE, { hour: '2-digit', minute: '2-digit', hour12: false, timeZone: C.TIMEZONE });
+  const fmtDate = new Intl.DateTimeFormat(C.LOCALE, { day: 'numeric', month: 'long', year: 'numeric', timeZone: C.TIMEZONE });
 
   const $ = id => document.getElementById(id);
   const time = iso => fmtTime.format(new Date(iso));
@@ -226,11 +226,16 @@
   async function load() {
     try {
       const res = await fetch('/api/dashboard', { cache: 'no-store' });
-      if (!res.ok) throw new Error(res.status);
+      if (!res.ok) throw new Error(`HTTP ${res.status}: ${res.statusText || 'Request failed'}`);
       data = await res.json();
+      $('connectionStatus').hidden = true;
       render();
     } catch (e) {
-      // Letzte Daten behalten
+      const status = $('connectionStatus');
+      const now = new Date();
+      status.textContent = `${fmtDate.format(now)} ${fmtTime.format(now)}: ${e.message || String(e)}`;
+      status.title = status.textContent;
+      status.hidden = false;
     }
   }
 

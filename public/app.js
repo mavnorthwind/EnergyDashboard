@@ -95,6 +95,10 @@
     }
 
     // Gitter und Achsen
+    for (let h = 3; h <= 21; h += 3) {
+      const x = X(h * 60);
+      svg.appendChild(el('line', { x1: x, x2: x, y1: M.t, y2: M.t + ph, stroke: '#16233a', 'stroke-width': 1 }));
+    }
     for (let v = yMin; v <= yMax; v += C.Y_STEP) {
       if (v !== C.LOW_THRESHOLD && v !== C.HIGH_THRESHOLD && v !== yMin) {
         svg.appendChild(el('line', { x1: M.l, x2: M.l + pw, y1: Y(v), y2: Y(v), stroke: '#16233a', 'stroke-width': 1 }));
